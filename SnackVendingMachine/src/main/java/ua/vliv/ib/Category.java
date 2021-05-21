@@ -1,6 +1,6 @@
 package ua.vliv.ib;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Category {
 	
@@ -8,15 +8,31 @@ public class Category {
 	private double price;
 	private int number;
 	private int quantity;
-	private Date date;
+	private LocalDate date;
 	
-	public Category() {	}
-	
+	public Category() {
+		
+	}
+		
+	public Category(String name, LocalDate date) {
+		super();
+		this.name = name;
+		this.date = date;
+	}
+
 	public Category(String name, double price, int number) {
 		super();
 		this.name = name;
 		this.price = price;
 		this.number = number;
+	}
+	
+	public Category(String name, double price, int number, int quantity) {
+		super();
+		this.name = name;
+		this.price = price;
+		this.number = number;
+		this.quantity = quantity;
 	}
 
 	public String getName() {
@@ -51,11 +67,11 @@ public class Category {
 		this.quantity = quantity;
 	}
 
-	public Date getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 
