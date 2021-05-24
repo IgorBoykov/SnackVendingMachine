@@ -26,7 +26,7 @@ public class Service {
 
 	}
 
-	public void addItem() {
+	public List<Category> addItem() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Pick the name of category");
 		String name = sc.nextLine();
@@ -34,32 +34,35 @@ public class Service {
 			if (!category.getName().equalsIgnoreCase(name))
 				continue;
 			else {
-				listofCategories.remove(category);
 				System.out.println("Enter the number of added snack items for sell");
 				int quantity = sc.nextInt();
 				category.setQuantity(quantity);
-				listofCategories.add(category);
 				System.out.println(category + ", " + quantity);
 			}
 
 		}
+		return listofCategories;
 
 	}
 
-	public void puchase() {
+	public List<Category> puchase() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Which snack do you want to buy? ");
 		String name = sc.nextLine();
 		for (Category category : listofCategories) {
-			if (!category.getName().equalsIgnoreCase(name) || category.getQuantity() == 0)
+			if (!category.getName().equalsIgnoreCase(name) || category.getQuantity() <= 0)
 				continue;
 			else {
 				LocalDate lt = LocalDate.now();
 				System.out.println(lt + " \n" + category);
-				category = new Category(name, lt);
+				category.setDate(lt);
+				int newquantity = category.getQuantity();
+				newquantity--;
+				category.setQuantity(newquantity);
 				soldCategories.add(category);
 			}
 		}
+		return listofCategories;
 	}
 
 	public void list() {
@@ -68,9 +71,10 @@ public class Service {
 	}
 
 	public void clear() {
-		for (Category category : listofCategories) {
+		for (int i = 0; i < listofCategories.size(); i++) {
+			Category category = listofCategories.get(i);
 			if (category.getQuantity() == 0) {
-				System.out.println(category);
+				System.out.println(category + " removed!");
 				listofCategories.remove(category);
 			}
 		}

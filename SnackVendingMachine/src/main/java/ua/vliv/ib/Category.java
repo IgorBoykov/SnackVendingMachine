@@ -14,9 +14,11 @@ public class Category {
 		
 	}
 		
-	public Category(String name, LocalDate date) {
+	public Category(String name, double price, int number, LocalDate date) {
 		super();
 		this.name = name;
+		this.price = price;
+		this.number = number;
 		this.date = date;
 	}
 
